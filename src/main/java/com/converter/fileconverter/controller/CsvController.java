@@ -36,16 +36,16 @@ public class CsvController {
             return "Error converting CSV: " + e.getMessage();
         }
     }
-//    @PostMapping("/convert-json-to-csv")
-//    public String convertJsonFileToCsv(
-//            @RequestPart("inputFile") MultipartFile inputFile,
-//            @RequestParam("outputFile") String outputFile) {
-//        try {
-//            csvService.jsonFileToCsvFile(inputFile, outputFile);
-//            return "JSON to CSV conversion successful. Output file created: " + outputFile;
-//        } catch (Exception e) {
-//            log.info("Error converting CSV: {}", e.getMessage());
-//            return "Error converting JSON to CSV: " + e.getMessage();
-//        }
-//    }
+    @PostMapping("/convert-json-to-csv")
+    public String convertJsonFileToCsv(
+            @RequestPart("inputFile") MultipartFile inputFile,
+            @RequestParam("outputFile") String outputFile) {
+        try {
+            csvService.jsonFileToCsvFile(inputFile, outputFile);
+            return "JSON to CSV conversion successful. Output file created: " + outputFile;
+        } catch (Exception e) {
+            log.info("Error converting CSV: {}", e.getMessage());
+            return "Error converting JSON to CSV: " + e.getMessage();
+        }
+    }
 }
