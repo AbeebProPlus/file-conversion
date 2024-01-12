@@ -10,5 +10,7 @@ import java.util.List;
 public interface JsonToCsv {
     String convertJsonToCsv(List<User> users);
     String readFromCsvWriteToCSV(MultipartFile inputFile, String outputFile);
-    String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException;
+//    String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException;
+
+    String jsonFileToCsvFile(MultipartFile inputFile, String outputPath, String outputFileName) throws IOException;
 }

@@ -2,7 +2,6 @@ package com.converter.fileconverter.services;
 
 import com.converter.fileconverter.data.JsonData;
 import com.converter.fileconverter.data.User;
-import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,9 +37,15 @@ public class JsonToCsvService implements JsonToCsv {
         }
     }
     @Override
-    public String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException {
+    public String jsonFileToCsvFile(MultipartFile inputFile, String outputPath, String outputFileName) throws IOException {
+        String defaultPath = System.getProperty("user.dir");
+        outputPath = (outputPath == null || outputPath.trim().isEmpty()) ? defaultPath : outputPath;
+
+        File outputFile = new File(outputPath, outputFileName);
+
         try (InputStream inputStream = inputFile.getInputStream();
              Writer writer = new java.io.FileWriter(outputFile)) {
+
             ObjectMapper objectMapper = new ObjectMapper();
             CsvMapper csvMapper = new CsvMapper();
             CsvSchema csvSchema = csvMapper.schemaFor(JsonData.class).withHeader();
@@ -53,7 +57,7 @@ public class JsonToCsvService implements JsonToCsv {
                 writer.write(csvLine + "\n");
             }
 
-            return "CSV file created successfully";
+            return "CSV file created successfully at: " + outputFile.getAbsolutePath();
         }
     }
 }

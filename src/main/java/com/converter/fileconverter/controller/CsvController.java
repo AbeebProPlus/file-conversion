@@ -36,12 +36,13 @@ public class CsvController {
         }
     }
     @PostMapping("/convert-json-to-csv")
-    public String convertJsonFileToCsv(
+    public String convertJsonFileToCsvFile(
             @RequestPart("inputFile") MultipartFile inputFile,
-            @RequestParam("outputFile") String outputFile) {
+            @RequestParam("outputPath") String outputPath,
+            @RequestParam("outputFileName") String outputFileName) {
         try {
-            csvService.jsonFileToCsvFile(inputFile, outputFile);
-            return "JSON to CSV conversion successful. Output file created: " + outputFile;
+            csvService.jsonFileToCsvFile(inputFile, outputPath, outputFileName);
+            return "JSON to CSV conversion successful.";
         } catch (Exception e) {
             return "Error converting JSON to CSV: " + e.getMessage();
         }
