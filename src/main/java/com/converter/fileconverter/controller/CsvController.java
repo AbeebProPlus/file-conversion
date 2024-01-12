@@ -32,7 +32,6 @@ public class CsvController {
             csvService.readFromCsvWriteToCSV(inputFile, outputFile);
             return "CSV conversion successful. Output file created: " + outputFile;
         } catch (Exception e) {
-            log.info("Error converting CSV: {}", e.getMessage());
             return "Error converting CSV: " + e.getMessage();
         }
     }
@@ -44,7 +43,6 @@ public class CsvController {
             csvService.jsonFileToCsvFile(inputFile, outputFile);
             return "JSON to CSV conversion successful. Output file created: " + outputFile;
         } catch (Exception e) {
-            log.info("Error converting CSV: {}", e.getMessage());
             return "Error converting JSON to CSV: " + e.getMessage();
         }
     }
