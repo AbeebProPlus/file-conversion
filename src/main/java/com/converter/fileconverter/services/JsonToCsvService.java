@@ -33,17 +33,17 @@ public class JsonToCsvService implements JsonToCsv {
             throw new RuntimeException("Error processing CSV files", e);
         }
     }
-//    @Override
-//    public String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException {
-//        try (InputStream inputStream = inputFile.getInputStream();
-//             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-//             Writer writer = new java.io.FileWriter(outputFile)) {
-//            char[] buffer = new char[1024];
-//            int bytesRead;
-//            while ((bytesRead = reader.read(buffer)) != -1) {
-//                writer.write(buffer, 0, bytesRead);
-//            }
-//        }
-//        return "CSV file created successfully";
-//    }
+    @Override
+    public String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException {
+        try (InputStream inputStream = inputFile.getInputStream();
+             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+             Writer writer = new java.io.FileWriter(outputFile)) {
+            char[] buffer = new char[1024];
+            int bytesRead;
+            while ((bytesRead = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, bytesRead);
+            }
+        }
+        return "CSV file created successfully";
+    }
 }
