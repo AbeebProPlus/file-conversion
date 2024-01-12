@@ -19,31 +19,6 @@ public class CsvController {
 
     private final JsonToCsvService csvService;
 
-    @PostMapping("/json-to-csv")
-    public ResponseEntity<String> convertJsonToCsv(@RequestBody CsvDto request) throws IOException {
-        String outputPath = request.getOutputPath();
-        String outputFileName = request.getOutputFileName() != null ? request.getOutputFileName() : "output.csv";
-
-        String csvData = csvService.convertJsonToCsv(request.getUsers(), outputPath, outputFileName);
-        if (outputPath == null || outputPath.trim().isEmpty()) {
-            Files.write(Paths.get(outputFileName), csvData.getBytes());
-            return ResponseEntity.ok("CSV file created at: " + Paths.get(outputFileName).toAbsolutePath());
-        } else {
-            Files.write(Paths.get(outputPath, outputFileName), csvData.getBytes());
-            return ResponseEntity.ok("CSV file created at: " + Paths.get(outputPath, outputFileName).toAbsolutePath());
-        }
-    }
-    @PostMapping("/convert-csv")
-    public String convertCsvFile(
-            @RequestPart("inputFile") MultipartFile inputFile,
-            @RequestParam("outputFile") String outputFile) {
-        try {
-            csvService.readFromCsvWriteToCSV(inputFile, outputFile);
-            return "CSV conversion successful. Output file created: " + outputFile;
-        } catch (Exception e) {
-            return "Error converting CSV: " + e.getMessage();
-        }
-    }
     @PostMapping("/convert-json-to-csv")
     public String convertJsonFileToCsvFile(
             @RequestPart("inputFile") MultipartFile inputFile,

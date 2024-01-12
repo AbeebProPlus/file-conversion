@@ -1,2 +1,20 @@
-Me,me@gmail.com,5000
-Who,who@gmail.com,4000
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "age": 30,
+    "email": "john.doe@example.com"
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "age": 25,
+    "email": "jane.doe@example.com"
+  },
+  {
+    "id": 3,
+    "name": "Alice Smith",
+    "age": 28,
+    "email": "alice.smith@example.com"
+  }
+]

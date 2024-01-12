@@ -8,12 +8,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface JsonToCsv {
-//    String convertJsonToCsv(List<User> users);
-
-    String convertJsonToCsv(List<User> users, String outputPath, String outputFileName);
-
-    String readFromCsvWriteToCSV(MultipartFile inputFile, String outputFile);
-//    String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException;
-
     String jsonFileToCsvFile(MultipartFile inputFile, String outputPath, String outputFileName) throws IOException;
 }
