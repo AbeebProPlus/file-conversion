@@ -18,12 +18,12 @@ public class CsvController {
 
     private final JsonToCsvService csvService;
 
-    @PostMapping("/json-to-csv")
-    public String convertJsonToCsv(@RequestBody CsvDto request) throws IOException {
-        String csvData = csvService.convertJsonToCsv(request.getUsers());
-            Files.write(Paths.get("output.csv"), csvData.getBytes());
-            return "CSV file created.";
-    }
+//    @PostMapping("/json-to-csv")
+//    public String convertJsonToCsv(@RequestBody CsvDto request) throws IOException {
+//        String csvData = csvService.convertJsonToCsv(request.getUsers());
+//            Files.write(Paths.get("output.csv"), csvData.getBytes());
+//            return "CSV file created.";
+//    }
     @PostMapping("/convert-csv")
     public String convertCsvFile(
             @RequestPart("inputFile") MultipartFile inputFile,
