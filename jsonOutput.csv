@@ -1,20 +1,9 @@
-[
-  {
-    "id": 1,
-    "name": "John Doe",
-    "age": 30,
-    "email": "john.doe@example.com"
-  },
-  {
-    "id": 2,
-    "name": "Jane Doe",
-    "age": 25,
-    "email": "jane.doe@example.com"
-  },
-  {
-    "id": 3,
-    "name": "Alice Smith",
-    "age": 28,
-    "email": "alice.smith@example.com"
-  }
-]
+age,email,id,name
+30,john.doe@example.com,1,"John Doe"
+
+age,email,id,name
+25,jane.doe@example.com,2,"Jane Doe"
+
+age,email,id,name
+28,alice.smith@example.com,3,"Alice Smith"
+

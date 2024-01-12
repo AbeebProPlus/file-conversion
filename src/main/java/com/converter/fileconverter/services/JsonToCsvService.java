@@ -1,6 +1,11 @@
 package com.converter.fileconverter.services;
 
+import com.converter.fileconverter.data.JsonData;
 import com.converter.fileconverter.data.User;
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,14 +41,19 @@ public class JsonToCsvService implements JsonToCsv {
     @Override
     public String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException {
         try (InputStream inputStream = inputFile.getInputStream();
-             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
              Writer writer = new java.io.FileWriter(outputFile)) {
-            char[] buffer = new char[1024];
-            int bytesRead;
-            while ((bytesRead = reader.read(buffer)) != -1) {
-                writer.write(buffer, 0, bytesRead);
+            ObjectMapper objectMapper = new ObjectMapper();
+            CsvMapper csvMapper = new CsvMapper();
+            CsvSchema csvSchema = csvMapper.schemaFor(JsonData.class).withHeader();
+
+            JsonData[] jsonDataArray = objectMapper.readValue(inputStream, JsonData[].class);
+
+            for (JsonData jsonData : jsonDataArray) {
+                String csvLine = csvMapper.writer(csvSchema).writeValueAsString(jsonData);
+                writer.write(csvLine + "\n");
             }
+
+            return "CSV file created successfully";
         }
-        return "CSV file created successfully";
     }
 }
