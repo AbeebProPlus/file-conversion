@@ -17,22 +17,22 @@ public class JsonToCsvService implements JsonToCsv {
                 .collect(Collectors.joining());
     }
 
-    @Override
-    public String readFromCsvWriteToCSV(MultipartFile inputFile, String outputFile) {
-        try (InputStream inputStream = inputFile.getInputStream();
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-             FileWriter writer = new FileWriter(outputFile)) {
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                writer.write(line + "\n");
-            }
-
-            return "CSV file created successfully";
-        } catch (IOException e) {
-            throw new RuntimeException("Error processing CSV files", e);
-        }
-    }
+//    @Override
+//    public String readFromCsvWriteToCSV(MultipartFile inputFile, String outputFile) {
+//        try (InputStream inputStream = inputFile.getInputStream();
+//             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+//             FileWriter writer = new FileWriter(outputFile)) {
+//
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                writer.write(line + "\n");
+//            }
+//
+//            return "CSV file created successfully";
+//        } catch (IOException e) {
+//            throw new RuntimeException("Error processing CSV files", e);
+//        }
+//    }
     @Override
     public String jsonFileToCsvFile(MultipartFile inputFile, String outputFile) throws IOException {
         try (InputStream inputStream = inputFile.getInputStream();
