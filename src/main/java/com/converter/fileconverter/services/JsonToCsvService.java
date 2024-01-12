@@ -14,10 +14,24 @@ import java.util.stream.Collectors;
 
 @Service
 public class JsonToCsvService implements JsonToCsv {
-    public String convertJsonToCsv(List<User> users) {
-        return users.stream()
-                .map(user -> String.format("%s,%s,%s%n", user.getName(), user.getEmail(), user.getBalance()))
-                .collect(Collectors.joining());
+    @Override
+    public String convertJsonToCsv(List<User> users, String outputPath, String outputFileName) {
+        String defaultPath = System.getProperty("user.dir");
+        outputPath = (outputPath == null || outputPath.trim().isEmpty()) ? defaultPath : outputPath;
+
+        File outputFile = new File(outputPath, outputFileName);
+
+        try (FileWriter writer = new FileWriter(outputFile)) {
+            String csvContent = users.stream()
+                    .map(user -> String.format("%s,%s,%s%n", user.getName(), user.getEmail(), user.getBalance()))
+                    .collect(Collectors.joining());
+
+            writer.write(csvContent);
+
+            return "CSV file created successfully at: " + outputFile.getAbsolutePath();
+        } catch (IOException e) {
+            return "Error creating CSV file: " + e.getMessage();
+        }
     }
 
     @Override

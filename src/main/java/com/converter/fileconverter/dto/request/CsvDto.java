@@ -11,4 +11,6 @@ import java.util.List;
 @Setter
 public class CsvDto {
     private List<User> users;
+    private String outputPath;
+    private String outputFileName;
 }
